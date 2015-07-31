@@ -53,34 +53,62 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         EditText editTextIterations = (EditText)findViewById(R.id.editText);
-        long iterations = Long.parseLong(editTextIterations.getText().toString());
+        final long iterations = Long.parseLong(editTextIterations.getText().toString());
 
-        double result = 0.0;
+        final double[] result = {0.0};
         switch (position) {
-            case 0: // Java
-                Pi pi = new Pi(iterations);
-                result =  pi.estimate();
+            case 0: { // Java
+                Measurement measurement = new Measurement() {
+                    @Override
+                    public void run() {
+                        Pi pi = new Pi(iterations);
+                        result[0] = pi.estimate();
+                    }
+                };
+                measurement.execute("Java");
                 break;
-            case 1: // C++
-                NativePi nativePi = new NativePi(iterations, 1);
-                result = nativePi.estimate();
+            }
+            case 1: { // C++
+                Measurement measurement = new Measurement() {
+                    @Override
+                    public void run() {
+                        NativePi nativePi = new NativePi(iterations, 1);
+                        result[0] = nativePi.estimate();
+                    }
+                };
+                measurement.execute("C++");
                 break;
-            case 2: // Java/C++
-                SemiNativePi semiNativePi = new SemiNativePi(iterations);
-                result = semiNativePi.estimate();
+            }
+            case 2: { // Java/C++
+                Measurement measurement = new Measurement() {
+                    @Override
+                    public void run() {
+                        SemiNativePi semiNativePi = new SemiNativePi(iterations);
+                        result[0] = semiNativePi.estimate();
+                    }
+                };
+                measurement.execute("Java/C++");
+                }
                 break;
-            case 3: // Threaded C++
-                long numberOfThreads = 2;
-                NativePi nativePi1 = new NativePi(iterations / numberOfThreads, numberOfThreads);
-                result = nativePi1.estimate(numberOfThreads);
-                break;
+            case 3: { // Threaded C++
+                Measurement measurement = new Measurement() {
+                    @Override
+                    public void run() {
+                        long numberOfThreads = 2;
+                        NativePi nativePi1 = new NativePi(iterations / numberOfThreads, numberOfThreads);
+                        result[0] = nativePi1.estimate(numberOfThreads);
+                    }
+                };
+                measurement.execute("Threaded C++");
+            }
+            break;
         }
 
         TextView textViewResults = (TextView)findViewById(R.id.textView);
-        textViewResults.setText(String.format("%1.8f", result));
+        textViewResults.setText(String.format("%1.8f", result[0]));
 
         TextView textViewEncrypted = (TextView)findViewById(R.id.encrypted);
-        String encrypted = NativeEncrypt.encrypt(String.format("%1.8f", result));
+        String encrypted = NativeEncrypt.encrypt(String.format("%1.8f", result[0]));
         textViewEncrypted.setText(encrypted);
     }
 

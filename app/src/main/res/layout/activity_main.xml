@@ -53,7 +53,7 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/encrypted"
-        android:text="10000"
+        android:text="500000"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="84dp"/>
