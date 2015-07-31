@@ -1,6 +1,6 @@
 # AndroidCalcPi
 
-This is a simple Android project to play with C++ and test Android Studio 1.3 and Gradle 2.5. Moreover, it is part of my tutorials and talks on how to use C++ in Android.
+This is a simple Android project to play with C++ and test Android Studio 1.3 and Gradle 2.5. Moreover, it is part of my [tutorials](http://www.slideshare.net/geisshirt/tips-and-tricks-for-building-high-performance-android-apps-using-native-code) and [talk](http://www.slideshare.net/geisshirt/building-high-performance-android-applications-in-java-and-c?related=1) on how to use C++ in Android.
 
 The following branches exist:
 
