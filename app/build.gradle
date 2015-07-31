@@ -18,6 +18,7 @@ model {
         moduleName = "calcPi"
         cppFlags += ["-Os", "-fexceptions"]
         stl = "gnustl_shared" // for exceptions
+        ldLibs += "log"
     }
 
     android.buildTypes {
