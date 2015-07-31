@@ -18,6 +18,10 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Loading the native code should probably be placed
+        // in a separate utility class.
+        System.loadLibrary("calcPi"); // "calcPi" is the Gradle module name
+
         Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
         String[] items = new String[]{"Java", "C++", "Mixture", "Posix Thread"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item, items);
@@ -54,12 +58,19 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         double result = 0.0;
         switch (position) {
             case 0: // Java
+                Pi pi = new Pi(iterations);
+                result =  pi.estimate();
                 break;
             case 1: // C++
+                NativePi nativePi = new NativePi(iterations);
+                result = nativePi.estimate();
                 break;
             case 2: // Java/C++
+                SemiNativePi semiNativePi = new SemiNativePi(iterations);
+                result = semiNativePi.estimate();
                 break;
             case 3: // Threaded C++
+                // TODO
                 break;
         }
 
