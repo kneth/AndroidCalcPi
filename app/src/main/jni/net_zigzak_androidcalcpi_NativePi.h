@@ -10,10 +10,10 @@ extern "C" {
 /*
  * Class:     net_zigzak_androidcalcpi_NativePi
  * Method:    nativeCreate
- * Signature: (J)J
+ * Signature: (JJ)J
  */
 JNIEXPORT jlong JNICALL Java_net_zigzak_androidcalcpi_NativePi_nativeCreate
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jobject, jlong, jlong);
 
 /*
  * Class:     net_zigzak_androidcalcpi_NativePi
@@ -22,6 +22,14 @@ JNIEXPORT jlong JNICALL Java_net_zigzak_androidcalcpi_NativePi_nativeCreate
  */
 JNIEXPORT jdouble JNICALL Java_net_zigzak_androidcalcpi_NativePi_nativeEstimate
   (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     net_zigzak_androidcalcpi_NativePi
+ * Method:    nativeEstimateThread
+ * Signature: (JJ)D
+ */
+JNIEXPORT jdouble JNICALL Java_net_zigzak_androidcalcpi_NativePi_nativeEstimateThread
+  (JNIEnv *, jobject, jlong, jlong);
 
 /*
  * Class:     net_zigzak_androidcalcpi_NativePi

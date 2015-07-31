@@ -2,13 +2,21 @@
 
 #include <cstdlib>
 #include <cmath>
+#include <climits>
 
 RNG::RNG(long seed) {
-    srand48(static_cast<unsigned>(seed));
+    if (seed == 0) {
+        seed = 1;
+    }
+    m_w = seed;
+    m_z = seed;
 }
 
 double RNG::uniform() {
-    return static_cast<double>(lrand48()) / static_cast<double>(RAND_MAX);
+    m_z = 36969 * (m_z & 65535) + (m_z >> 16);
+    m_w = 18000 * (m_w & 65535) + (m_w >> 16);
+    uint n = (m_z << 16) + m_w;
+    return static_cast<double>(n) / static_cast<double>(UINT_MAX);
 }
 
 void RNG::gauss2d(double &x, double &y) {

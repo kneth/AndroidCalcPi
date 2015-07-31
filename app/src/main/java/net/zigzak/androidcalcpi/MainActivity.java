@@ -62,7 +62,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 result =  pi.estimate();
                 break;
             case 1: // C++
-                NativePi nativePi = new NativePi(iterations);
+                NativePi nativePi = new NativePi(iterations, 1);
                 result = nativePi.estimate();
                 break;
             case 2: // Java/C++
@@ -70,7 +70,9 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 result = semiNativePi.estimate();
                 break;
             case 3: // Threaded C++
-                // TODO
+                long numberOfThreads = 2;
+                NativePi nativePi1 = new NativePi(iterations / numberOfThreads, numberOfThreads);
+                result = nativePi1.estimate(numberOfThreads);
                 break;
         }
 
