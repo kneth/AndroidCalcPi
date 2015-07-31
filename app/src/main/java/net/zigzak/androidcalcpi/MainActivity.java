@@ -78,6 +78,10 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
         TextView textViewResults = (TextView)findViewById(R.id.textView);
         textViewResults.setText(String.format("%1.8f", result));
+
+        TextView textViewEncrypted = (TextView)findViewById(R.id.encrypted);
+        String encrypted = NativeEncrypt.encrypt(String.format("%1.8f", result));
+        textViewEncrypted.setText(encrypted);
     }
 
     @Override

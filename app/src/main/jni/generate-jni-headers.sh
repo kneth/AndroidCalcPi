@@ -11,7 +11,7 @@ CLASSDIR="$(pwd)/../../../../app/build/intermediates/classes/all/debug"
 JNIDIR="$(pwd)"
 
 # Generate the headers
-(cd "$CLASSDIR" && javah -jni -classpath "$CLASSDIR" -d "$JNIDIR" net.zigzak.androidcalcpi.NativePi net.zigzak.androidcalcpi.NativeRNG)
+(cd "$CLASSDIR" && javah -jni -classpath "$CLASSDIR" -d "$JNIDIR" net.zigzak.androidcalcpi.NativeEncrypt net.zigzak.androidcalcpi.NativePi net.zigzak.androidcalcpi.NativeRNG)
 
 # Remove "empty" header files (they have 13 lines)
 wc -l "$JNIDIR"/*.h | grep " 13 " | awk '{print $2}' | xargs rm -f
