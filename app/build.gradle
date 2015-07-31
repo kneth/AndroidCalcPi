@@ -16,9 +16,11 @@ model {
 
     android.ndk {
         moduleName = "calcPi"
-        cppFlags += ["-Os", "-fexceptions"]
+        cppFlags += ["-Os", "-fexceptions",  "-ffunction-sections", "-fdata-sections", "-fvisibility=hidden",
+                     "-Wl,--gc-sections", "-flto"]
         stl = "gnustl_shared" // for exceptions
         ldLibs += "log"
+        ldFlags += ["-ffunction-sections", "-fdata-sections", "-fvisibility=hidden", "-Wl,--gc-sections", "-flto"] // reduce sizeß
     }
 
     android.buildTypes {
