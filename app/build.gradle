@@ -3,7 +3,7 @@ apply plugin: 'com.android.model.application'
 model {
     android {
         compileSdkVersion = 22
-        buildToolsVersion = "23.0.0 rc3"
+        buildToolsVersion = "23.0.2"
 
         defaultConfig.with {
             applicationId = "net.zigzak.androidcalcpi"
@@ -16,26 +16,24 @@ model {
 
     android.ndk {
         moduleName = "calcPi"
-        cppFlags += ["-Os", "-fexceptions",  "-ffunction-sections", "-fdata-sections", "-fvisibility=hidden",
-                     "-Wl,--gc-sections", "-flto"]
+        cppFlags.addAll(["-fexceptions", "-ffunction-sections", "-fdata-sections", "-fvisibility=hidden", "-Wl,--gc-sections", "-flto"])
         stl = "gnustl_shared" // for exceptions
-        ldLibs += "log"
-        ldFlags += ["-ffunction-sections", "-fdata-sections", "-fvisibility=hidden", "-Wl,--gc-sections", "-flto"] // reduce sizeß
+        ldLibs.add("log")
+        ldFlags.addAll(["-ffunction-sections", "-fdata-sections", "-fvisibility=hidden", "-Wl,--gc-sections", "-flto"])
     }
 
     android.buildTypes {
         release {
             minifyEnabled = false
-            proguardFiles += file('proguard-rules.txt')
-        }
-
-        debug {
-            debuggable = true
+            proguardFiles.add(file('proguard-rules.txt'))
+            ndk.with {
+                debuggable = true
+            }
         }
     }
 
     android.productFlavors {
-        create("all")
+        create("fat")
     }
 }
 
